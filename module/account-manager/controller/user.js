@@ -7,7 +7,7 @@ const {check, validationResult} = require('express-validator');
 const { ReasonPhrases, StatusCodes, getReasonPhrase, getStatusCode} = require('http-status-codes');
 //var mUser = require('../model/user');
 var account = require('../service/account');
-var ApiResponse = require('../../utils/api-response');
+var ApiResponse = require('../utils/api-response');
 
 exports.findById = function (id, fn) {
     account.findById(id, fn);
