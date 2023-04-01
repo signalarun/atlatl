@@ -79,8 +79,8 @@ router.get('/v1/auth/google/failure', (req, res) => {
 
 router.get( '/v1/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/v1/secret',
-        failureRedirect: '/v1/auth/google/failure'
+        successRedirect: '/api/account/authentication/v1/secret',
+        failureRedirect: '/api/account/authentication/v1/auth/google/failure'
 }));
 
 router.get('/v1/auth/facebook',
@@ -94,8 +94,8 @@ router.get('/v1/auth/facebook/failure', (req, res) => {
 
 router.get( '/v1/auth/facebook/callback',
     passport.authenticate( 'facebook', {
-        successRedirect: '/v1/secret',
-        failureRedirect: '/v1/auth/facebook/failure'
+        successRedirect: '/api/account/authentication/v1/secret',
+        failureRedirect: '/api/account/authentication/v1/auth/facebook/failure'
 }));
 
 router.get('/auth/twitter',
@@ -109,8 +109,8 @@ router.get('/v1/auth/twitter/failure', (req, res) => {
 
 router.get( '/v1/auth/twitter/callback',
     passport.authenticate( 'twitter', {
-        successRedirect: '/v1/secret',
-        failureRedirect: '/v1/auth/twitter/failure'
+        successRedirect: '/api/account/authentication/v1/secret',
+        failureRedirect: '/api/account/authentication/v1/auth/twitter/failure'
 }));
 
 /**
