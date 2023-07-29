@@ -12,7 +12,7 @@ const user = require('../controller/user');
 const passwordUtil = require('./password');
 const oauthConfig = require('./oauthconfig');
 
-/*
+/*Used to add a pieceof information into cookie.
  In a typical web application, the credentials used to authenticate a user will
  only be transmitted during the login request. If authentication succeeds, 
  a session will be established and maintained via a cookie set in the user's browser.
@@ -21,11 +21,12 @@ const oauthConfig = require('./oauthconfig');
  serialize and deserialize user instances to and from the session. 
  Ref. http://www.passportjs.org/docs/authenticate/
  */
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function (user, done) { //console.log('sUser', user);
   done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
+// Used to decode the recieved cookie and persist the session
+passport.deserializeUser(function (id, done) { //console.log('dUserId', id) 
   user.findById(id, function (err, user) {
     done(err, user);
   });
@@ -89,8 +90,10 @@ passport.use(new GoogleStrategy({
   clientID: oauthConfig.Google.clientID,
   clientSecret: oauthConfig.Google.clientSecret,
   callbackURL: oauthConfig.Google.callback
-}, (accessToken, refreshToken, profile, done) => {
-  done(null, profile);
+}, (accessToken, refreshToken, profile, done) => { console.log('profile', profile);
+  // FIXME:  The below lines should only be executed if user is registered
+  profile.id = profile.emails[0].value; // hack
+  done(null, profile); 
 }));
 
 passport.use(new FacebookStrategy({
